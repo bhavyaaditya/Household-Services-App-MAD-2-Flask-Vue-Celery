@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body { font-family: Arial, sans-serif; line-height: 1.5; }
+    h2 { color: #1a73e8; }
+    ul { padding-left: 20px; }
+  </style>
+</head>
+<body>
+  <h2>Hello {{ tradie.first_name }},</h2>
+
+  {% if due_requests %}
+    <p><strong>Requests Due Today:</strong></p>
+    <ul>
+      {% for req in due_requests %}
+        <li>{{ req.name }} (at {{ req.location }})</li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No requests due today.</p>
+  {% endif %}
+
+  {% if open_requests %}
+    <p><strong>Open Service Requests:</strong></p>
+    <ul>
+      {% for req in open_requests %}
+        <li>{{ req.name }} ({{ req.location }}) - Due {{ req.due_date.strftime("%Y-%m-%d") }}</li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No new open requests today.</p>
+  {% endif %}
+
+  {% if accepted_requests %}
+    <p><strong>You were selected for:</strong></p>
+    <ul>
+      {% for req in accepted_requests %}
+        <li>{{ req.name }} - Due {{ req.due_date.strftime("%Y-%m-%d") }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+  {% if rejected_requests %}
+    <p><strong>Applications that were not selected:</strong></p>
+    <ul>
+      {% for req in rejected_requests %}
+        <li>{{ req.name }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+</body>
+</html>
