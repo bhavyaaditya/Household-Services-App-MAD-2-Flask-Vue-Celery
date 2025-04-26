@@ -3,6 +3,7 @@
 
 ### Backend
 ```powershell
+$env:FLASK_APP="tradie_match.py"
 flask --debug run
 ```
 
